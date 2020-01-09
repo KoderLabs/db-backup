@@ -10,7 +10,7 @@ Docker based db backup script.
   Instructions can be found at
   - [Docker](https://docs.docker.com/install/)
   - [docker-compose](https://docs.docker.com/compose/install/)
-- Edit docker-compose.yml (optional if not using docker-compose) required if your database ports are not bind with host by adding `network` in `services`.`db-backup`.`networks` and `networks` with the correct network parameters.
+- Edit docker-compose.yml (optional if not using docker-compose) required if your database ports are not bind with host by adding `network` in `services.db-backup.networks` and `networks` with the correct network parameters.
 
   #### example
 
@@ -48,12 +48,10 @@ Docker based db backup script.
   ```
 
 - Copy `config.example.js` to `config.js`
-- Edit `config.js` according to the requirements using the [configuration document][1]
+- Edit `config.js` according to the requirements using the configuration document below
 - start with `docker-compose up` or `docker run`
 
 ---
-
-[1]: Configutation
 
 ### Configuration
 
@@ -100,12 +98,12 @@ module.exports = {
 | Field                                      | Type                    | Description                                                                                            |
 | ------------------------------------------ | ----------------------- | ------------------------------------------------------------------------------------------------------ |
 | `options`                                  | `object`                | Global option i.e applies on all backup objects                                                        |
-| `options.cron_exp`                         | `string|false`          | Node-cron expression to specify repeat cycle                                                           |
+| `options.cron_exp`                         | `string\|false`          | Node-cron expression to specify repeat cycle                                                           |
 | `backups`                                  | `array`                 | Contains configuration to backup multiple databases                                                    |
 | `backups.*.source`                         | `object`                | Contains connection information of the database                                                        |
 | `backups.*.source.type`                    | `string`                | allowed values `mysql`,`mongo`,`redis`                                                                 |
 | `backups.*.source.host`                    | `string`                | db host name or ip                                                                                     |
-| `backups.*.source.port`                    | `string|number`         | db port                                                                                                |
+| `backups.*.source.port`                    | `string\|number`         | db port                                                                                                |
 | `backups.*.source.username`                | `string`                | db username                                                                                            |
 | `backups.*.source.password`                | `string`                | db password                                                                                            |
 | `backups.*.source.databases`               | `array`                 | db names array                                                                                         |
@@ -113,7 +111,7 @@ module.exports = {
 | `backups.*.destinations`                   | `array`                 | contains destination configuration objects                                                             |
 | `backups.*.destinations.*.type`            | `string`                | allowed values are `file`,`aws-s3` for file & AWS S3 storage respectively                              |
 | `backups.*.destinations.*.path`            | `string`                | path where the backuped file will be stored                                                            |
-| `backups.*.destinations.*.name`            | `string|(db) => string` | name of the created file with extension, accepts callback to compute name when saving                  |
+| `backups.*.destinations.*.name`            | `string\|(db) => string` | name of the created file with extension, accepts callback to compute name when saving                  |
 | `backups.*.destinations.*.bucket`          | `string`                | Bucket name only used when destination type is `aws-s3`                                                |
 | `backups.*.destinations.*.accessKeyId`     | `string`                | accessKeyId only used when destination type is `aws-s3`, do not provide if using instance profiles     |
 | `backups.*.destinations.*.secretAccessKey` | `string`                | secretAccessKey only used when destination type is `aws-s3`, do not provide if using instance profiles |
