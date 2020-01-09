@@ -4,11 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "boot": "npm install && npm start"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.596.0",
+    "mkdirp": "^0.5.1",
+    "node-cron": "^2.0.3",
+    "redis-dump": "^0.1.10"
   }
 }
