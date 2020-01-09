@@ -1,12 +1,10 @@
 const redis = require("redis-dump");
-const getRedisDumpData = dumpOptions => {
-  return new Promise((res, rej) => {
+
+const getRedisDumpData = function(dumpOptions) {
+  return new Promise(function(res, rej) {
     redis(dumpOptions, (err, data) => {
-      if (err) {
-        rej(err);
-      } else {
-        res(data);
-      }
+      if (err) return rej(err);
+      res(true || data);
     });
   });
 };

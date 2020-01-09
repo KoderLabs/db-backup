@@ -1,4 +1,6 @@
 const fs = require("fs");
+const {exec} = require("child_process");
+
 
 const deleteFile = async function(filePath) {
   return new Promise(function(res, rej) {
@@ -18,7 +20,17 @@ const writeFile = async function(filePath, data) {
   });
 };
 
+const copyFile = async function(source, destination) {
+  return new Promise(function(res, rej) {
+    exec(`cp ${source} ${destination}`, (err, stdout, stderr) => {
+      if (err) return rej(err);
+      res(true);
+    });
+  });
+};
+
 module.exports = {
   writeFile,
-  deleteFile
+  deleteFile,
+  copyFile
 };

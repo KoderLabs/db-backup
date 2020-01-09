@@ -1,0 +1,9 @@
+version: "3"
+services:
+  db-backup:
+    container_name: db-backup
+    build: .
+    restart: always
+    volumes: 
+      - ./:/opt/dbbackup
+    network_mode: host
