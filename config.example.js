@@ -28,25 +28,27 @@ module.exports = {
         {
           type: "file",
           path: "./backups/mysql/",
-          name: ".sql", //name of file with .sql extension
+          name: ".gzip", //name of file with .gzip extension
           name: db => {
-            return db + "aaa.sql";
-          }
+            return db + "aaa.gzip";
+          },
+          zip_password: "test"
         },
         {
           type: "aws-s3",
           path: "/backups/mysql/",
-          name: "a.sql",
+          name: "a.gzip",
           bucket: "swiftchat.io.dev",
           accessKeyId: "test", // remove to use instance profiles
           secretAccessKey: "test", // remove to use instance profiles
-          acl: "private"
+          acl: "private",
+          zip_password: "test"
         }
       ]
     },
     {
       source: {
-        type: "redis", 
+        type: "redis",
         host: "127.0.0.1",
         port: "6379",
         databases: ["0"]
@@ -57,8 +59,9 @@ module.exports = {
           path: "./backups/mysql/",
           name: db => {
             return db + "aaa.rdb";
-          }
-        },
+          },
+          zip_password: "test"
+        }
       ]
     },
     {
@@ -68,14 +71,15 @@ module.exports = {
         port: "27017",
         username: "",
         password: "",
-        databases: ["demo"] 
+        databases: ["demo"]
       },
       destinations: [
         {
           type: "file",
           path: "./backups/mysql/",
-          name: "a.gzip" 
-        },
+          name: "a.gzip",
+          zip_password: "test"
+        }
       ]
     }
   ]

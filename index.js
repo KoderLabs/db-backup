@@ -8,6 +8,7 @@ const file = require("./driver/file");
 const awsS3 = require("./driver/aws_s3");
 
 const { deleteFile } = require("./helper/file");
+const { createZip } = require("./helper/zip");
 
 const backupDrivers = {
   mysql: mysql.dump,
@@ -36,16 +37,17 @@ let backup = async function(config) {
   } catch (e) {
     return console.error(e) || console.log("Error occurred");
   }
-
+  let destFilePath;
   for (let dest of config.destinations) {
     try {
       if (!storageDrivers[dest.type]) {
         throw "no valid storage driver found for " + dest.type;
       }
-      await storageDrivers[dest.type]({
+      destFilePath = await storageDrivers[dest.type]({
         ...dest,
         tempFilePath: fileName,
-        database: config.source.database
+        database: config.source.database,
+        password: dest.zip_password
       });
     } catch (e) {
       console.error(e);
@@ -58,9 +60,7 @@ for (let config of parsedConfig) {
   let processor = function() {
     backup(config);
   };
-  config.cron_exp === false
-    ? setTimeout(processor, 0)
-    : cron.schedule(config.cron_exp, processor);
+  config.cron_exp === false ? setTimeout(processor, 0) : cron.schedule(config.cron_exp, processor);
 }
 
 // to prevent exiting
