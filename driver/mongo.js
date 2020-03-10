@@ -1,5 +1,5 @@
 const { createDirectory } = require("../helper/directory");
-const {exec} = require("child_process");
+const { exec } = require("child_process");
 
 const mongoDump = async function({
   host,

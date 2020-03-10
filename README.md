@@ -79,7 +79,8 @@ module.exports = {
           name: ".sql", //name of file with .sql extension
           name: db => {
             return db + "aaa.sql";
-          }
+          },
+          zip_password: "test" //password for zip file
         },
         {
           type: "aws-s3",
@@ -88,7 +89,8 @@ module.exports = {
           bucket: "swiftchat.io.dev",
           accessKeyId: "test", // remove to use instance profiles
           secretAccessKey: "test", // remove to use instance profiles
-          acl: "private"
+          acl: "private",
+          zip_password: "test"
         }
       ]
     }
@@ -116,4 +118,5 @@ module.exports = {
 | `backups.*.destinations.*.accessKeyId`     | `string`                | accessKeyId only used when destination type is `aws-s3`, do not provide if using instance profiles     |
 | `backups.*.destinations.*.secretAccessKey` | `string`                | secretAccessKey only used when destination type is `aws-s3`, do not provide if using instance profiles |
 | `backups.*.destinations.*.acl`             | `string`                | acl for the created file. only used when destination type is `aws-s3`.                                 |
+| `backups.*.destinations.*.zip_password`    | `string`                | password for the created zip file.                                                                     |
 
