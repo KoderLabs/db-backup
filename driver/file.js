@@ -3,7 +3,13 @@ const { createDirectory } = require("../helper/directory");
 const { createZip } = require("../helper/zip");
 const pathLib = require("path");
 
-const write = async function({ tempFilePath, path, name, database, password = "" }) {
+const write = async function({
+  tempFilePath,
+  path,
+  name,
+  database,
+  password = ""
+}) {
   await createDirectory(path);
 
   if (typeof name === "function") {
@@ -25,7 +31,9 @@ const write = async function({ tempFilePath, path, name, database, password = ""
 
   console.log(`Starting zip [file]${tempFilePath} to [file]${zipDestFilePath}`);
   result = await createZip(zipDestFilePath, destFilePath, password);
-  console.log(`Done with zip [file]${tempFilePath} to [file]${zipDestFilePath}`);
+  console.log(
+    `Done with zip [file]${tempFilePath} to [file]${zipDestFilePath}`
+  );
 
   return result;
 };

@@ -5,7 +5,17 @@ const fs = require("fs");
 const { copyFile } = require("../helper/file");
 const { createZip } = require("../helper/zip");
 
-const write = async function({ tempFilePath, path, name, database, secretAccessKey, accessKeyId, bucket, acl, password = "" }) {
+const write = async function({
+  tempFilePath,
+  path,
+  name,
+  database,
+  secretAccessKey,
+  accessKeyId,
+  bucket,
+  acl,
+  password = ""
+}) {
   const s3Config = {};
 
   accessKeyId && (s3Config.accessKeyId = accessKeyId);
@@ -33,7 +43,9 @@ const write = async function({ tempFilePath, path, name, database, secretAccessK
       createZip(zipKey, key, password).then(zip => {
         console.log(`Done with zip [file]${tempFilePath} to [file]${zipKey}`);
         const stream = fs.createReadStream(zipKey);
-        console.log(`Starting upload of [file]${tempFilePath} to [Bucket]${bucket} with [key]${zipKey}`);
+        console.log(
+          `Starting upload of [file]${tempFilePath} to [Bucket]${bucket} with [key]${zipKey}`
+        );
         s3.upload(
           {
             Bucket: bucket,
@@ -44,7 +56,9 @@ const write = async function({ tempFilePath, path, name, database, secretAccessK
           uploadOptions,
           function(err, data) {
             if (err) return rej(err);
-            console.log(`Done with upload of [file]${tempFilePath} to [Bucket]${bucket} with [key]${key}`);
+            console.log(
+              `Done with upload of [file]${tempFilePath} to [Bucket]${bucket} with [key]${key}`
+            );
             res(data);
           }
         );

@@ -60,7 +60,9 @@ for (let config of parsedConfig) {
   let processor = function() {
     backup(config);
   };
-  config.cron_exp === false ? setTimeout(processor, 0) : cron.schedule(config.cron_exp, processor);
+  config.cron_exp === false
+    ? setTimeout(processor, 0)
+    : cron.schedule(config.cron_exp, processor);
 }
 
 // to prevent exiting
