@@ -2,6 +2,7 @@ from koderlabs/node-build:latest
 
 WORKDIR /opt/dbbackup
 
+RUN apt-get clean 
 RUN apt-get update && apt-get install -y lsb-release && apt-get clean all
 RUN apt install -y mysql-client
 
@@ -13,6 +14,7 @@ RUN  apt-get update
 RUN  apt-get install -y mongodb-org-tools
 
 RUN apt install -y redis-tools
+RUN apt install -y zip
 
 RUN npm -v
 
