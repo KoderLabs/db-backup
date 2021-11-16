@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.596.0",
+    "aws-sdk": "^2.814.0",
     "mkdirp": "^0.5.1",
     "node-cron": "^2.0.3",
     "redis-dump": "^0.1.10"
